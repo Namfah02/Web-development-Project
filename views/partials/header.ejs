@@ -1,0 +1,35 @@
+<header>
+    <nav>
+        <section class="header-menu">
+            <section class="nav-wrapper">
+                <section class="logo"><a href="/product_item"><img src="images/logo.png" alt=" logo image"></a></section>
+                <section>
+                    <ul class="menu" id="navMenu">
+                        <li><a href="/product_item">Products</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/review">Reviews</a></li>
+                        <li><a href="/staff_login">Staff login</a></li>
+                    </ul>
+                    <div class="ham-menu" onclick="toggleHam(this)">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </nav>
+    <script>
+        function toggleHam(x) {
+    x.classList.toggle("change");
+
+    let navMenu = document.getElementById('navMenu');
+    if (navMenu.className === 'menu') {
+        navMenu.className += ' menu-active'
+    } else {
+        navMenu.className = 'menu';
+    }
+}
+
+    </script>
+</header>

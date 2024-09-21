@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Hour - Staff change log</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header class="staff-header">
+            <section class="logo"><a href="/staff_changelog"><img src="images/logo.png" alt=" logo image"></a></section>
+            <section class="logout"><a href="/staff_logout" class="staff-logout">Logout</a></section>
+        </header>
+        <%- include("partials/staff_nav.ejs", { accessRole }) %>
+            <article>
+                <h1>Change Log</h1>
+                <form action="staff_changelog" method="get" class="search-changelog">
+                    <section><input type="text" name="search_changelog" id="search-changelog" placeholder="Staff or Product" class="search-form" value=""/>
+                        <br><br>
+                        <label for="startDate">Start:</label>
+                        <input type="date" id="startDate" name="startDate" value="" required>
+                        <label for="endDate">End:</label>
+                        <input type="date" id="endDate" name="endDate" value="" required>
+                        <input type="submit" value="Search" class="search-button" />
+                    </section>
+                    <section class="changelog-table">
+                        <table>
+                            <tr>
+                                <th>Product</th>
+                                <th>Date last updated</th>
+                                <th>Updated by</th>
+                                <th>Description</th>
+                            </tr>
+                            <% for (const ChangeLog of changelog) { %>
+                                <tr>
+                                    <td>
+                                        <%= ChangeLog.product_id %>
+                                    </td>
+                                    <td>
+                                        <%= ChangeLog.date_last_updated %>
+                                    </td>
+                                    <td>
+                                        <%= ChangeLog.staff_id %>
+                                    </td>
+                                    <td>
+                                        <%= ChangeLog.description%>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </table>
+                    </section>
+                </form>
+            </article>
+            <%- include("partials/footer.ejs") %>
+    </main>
+
+</body>
+
+</html>

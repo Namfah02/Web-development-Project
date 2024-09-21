@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Hour - Staff User</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header class="staff-header">
+            <section class="logo"><a href="/staff_changelog"><img src="images/logo.png" alt=" logo image"></a></section>
+            <section class="logout"><a href="/staff_logout" class="staff-logout">Logout</a></section>
+        </header>
+        <%- include("partials/staff_nav.ejs", { accessRole }) %>
+        <h1>Staff User</h1>
+        <article class="user-page">
+            <section class="staff-user">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Username</th>
+                    </tr>
+                    <% for (let staff of allStaff) { %>
+                        <tr>
+                            <td>
+                                <%= staff.first_name %>
+                                    <%= staff.last_name %>
+                            </td>
+                            <td>
+                                <%= staff.username %>
+                            </td>
+                            <td>
+                                <%= staff.role %>
+                            </td>
+                            <td><a href="/staff_user?edit_id=<%= staff.id %>" class="edit-button"> Edit</a></td>
+                        </tr>
+                        <% } %>
+                </table>
+            </section>
+            <section class="edit-staff">
+                <form action="/edit_staff" method="post" class="form-staff">
+                    <input type="hidden" name="staff_id" value="<%= editStaff.id %>" />
+                    <label for="first-name">First Name:</label>
+                    <input type="text" name="first_name" id="first-name" value="<%= editStaff.first_name %>" />
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" name="last_name" id="last-name" value="<%= editStaff.last_name %>" />
+                    <label for="access-role">Role: </label>
+                    <select name="access_role" id="access-role">
+                        <option <%=editStaff.role=="manager" ? "selected" : "" %> value="manager">
+                            Manager
+                        </option>
+                        <option <%=editStaff.role=="stock" ? "selected" : "" %> value="stock">
+                            Stock
+                        </option>
+                        <option <%=editStaff.role=="sales" ? "selected" : "" %> value="sales">
+                            Sales
+                        </option>
+                    </select>
+                    
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" value="<%= editStaff.username %>" />
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" value="<%= editStaff.password %>" />
+                    <section class="user-button-section">
+                        <input type="submit" name="action" value="delete" class="delete-button"/>
+                    <% if (editStaff.id=="0" ) { %>
+                        <input type="submit" name="action" value="create" class="update-button"/>
+                        <% } else { %>
+                            <input type="submit" name="action" value="update" class="update-button"/>
+                            <% } %>
+                            
+                    </section>
+                </form>
+                
+            </section>
+        </article>
+        <%- include("partials/footer.ejs") %>
+    </main>
+</body>
+
+</html>

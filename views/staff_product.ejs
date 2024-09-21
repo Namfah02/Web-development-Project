@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Hour - Staff Product</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header class="staff-header">
+            <section class="logo"><a href="/staff_changelog"><img src="images/logo.png" alt=" logo image"></a></section>
+            <section class="logout"><a href="/staff_logout" class="staff-logout">Logout</a></section>
+        </header>
+        <%- include("partials/staff_nav.ejs", { accessRole }) %>
+        <h1>Products</h1>
+        <article class="staff-product-page">
+
+            <section class="staff-product">
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                    <% for (let productfeature of allProduct) { %>
+                        <tr>
+                            <td>
+                                <%= productfeature.product_name %>
+                            </td>
+                            <td>
+                                <%= productfeature.product_model %>
+                            </td>
+                            <td>
+                                <%= productfeature.product_brand %>
+                            </td>
+                            <td>
+                                <%= productfeature.product_price %>
+                            </td>
+                            <td>
+                                <%= productfeature.product_stock %>
+                            </td>
+                            <td><a href="/staff_product?edit_id=<%= productfeature.product_id %>" class="edit-button">
+                                    Edit</a></td>
+                        </tr>
+                        <% } %>
+                </table>
+            </section>
+            <section class="edit-product">
+                <form action="/edit_product" method="post" class="form-staff-product">
+                    <h3>Product</h3>
+                    <section class="products-form-section">
+                        <input type="hidden" name="product_id" value="<%= editProduct.product_id %>" />
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" value="<%= editProduct.product_name %>" />
+                        <label for="model">Model:</label>
+                        <input type="text" name="model" id="model" value="<%= editProduct.product_model %>" />
+                        <label for="model">Brand:</label>
+                        <input type="text" name="brand" id="brand" value="<%= editProduct.product_brand %>" />
+                        <label for="price">Price:</label>
+                        <input type="text" name="price" id="price" value="<%= editProduct.product_price %>" />
+                        <label for="stock">Stock:</label>
+                        <input type="text" name="stock" id="stock" value="<%= editProduct.product_stock %>" />
+                    </section>
+
+                    <h3>Feature</h3>
+                    <section class="feature-section">
+                        <input type="hidden" name="feature_id" value="<%= editProduct.feature_id %>" />
+                        <label for="weight">Weight:</label>
+                        <input type="text" name="weight" id="weight" value="<%= editProduct.feature_weight %>" />
+                        <label for="dimensions">Dimensions:</label>
+                        <input type="text" name="dimensions" id="dimensions"
+                            value="<%= editProduct.feature_dimensions %>" />
+                        <label for="os">OS:</label>
+                        <input type="text" name="os" id="os" value="<%= editProduct.feature_os %>" />
+                        <label for="screensize">Screensize:</label>
+                        <input type="text" name="screensize" id="screensize"
+                            value="<%= editProduct.feature_screensize %>" />
+                        <label for="resolution">Resolution:</label>
+                        <input type="text" name="resolution" id="resolution"
+                            value="<%= editProduct.feature_resolution %>" />
+                        <label for="cpu">CPU:</label>
+                        <input type="text" name="cpu" id="cpu" value="<%= editProduct.feature_cpu %>" />
+                        <label for="ram">RAM:</label>
+                        <input type="text" name="ram" id="ram" value="<%= editProduct.feature_ram %>" />
+                        <label for="storage">Storage:</label>
+                        <input type="text" name="storage" id="storage" value="<%= editProduct.feature_storage %>" />
+                        <label for="battery">Battery:</label>
+                        <input type="text" name="battery" id="battery" value="<%= editProduct.feature_battery %>" />
+                        <label for="camera">Camera:</label>
+                        <input type="text" name="camera" id="camera" value="<%= editProduct.feature_camera %>" />
+                    </section>
+                    <section class="button-section">
+                        <input type="submit" name="action" value="delete" class="delete-button" />
+                        <% if (editProduct.product_id=="" ) { %>
+                            <input type="submit" name="action" value="create" class="update-button" />
+                            <% } else { %>
+                                <input type="submit" name="action" value="update" class="update-button" />
+                                <% } %>
+                    </section>
+                </form>
+            </section>
+        </article>
+        <%- include("partials/footer.ejs") %>
+    </main>
+</body>
+
+</html>

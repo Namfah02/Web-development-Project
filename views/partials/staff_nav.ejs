@@ -1,0 +1,14 @@
+<nav class="staff-nav">
+    <% if (accessRole === "manager") { %>
+        <a href="/staff_user">User</a>
+        <a href="/staff_product">Products</a>
+        <a href="/staff_order">Orders</a>
+        <a href="/staff_changelog">Change log</a>
+        <% } else if (accessRole == "stock") { %>
+        <a href="/staff_product">Products</a>
+        <% } else if (accessRole == "sales") { %>
+        <a href="/staff_order">Orders</a>
+        <% } %>
+</nav>
+
+

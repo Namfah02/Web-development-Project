@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Hour - Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <section class="logo"><a href="/product_item"><img src="images/logo.png" alt=" logo image"></a></section>
+        </header>
+        <article>
+            <h1>Checkout</h1>
+            <section class="product-checkout">
+                <section class="product-section">
+                    <figure>
+                        <img src="images/mobilephone.jpg" alt="Mobile phone image" />
+                        <h2><%= productfeature.product_name %>
+                        </h2>
+                        <figcaption>$<%= productfeature.product_price %></figcaption>
+                    </figure>
+                </section>
+                <section class="form-section">
+                    <form action="/product_checkout" method="post" class="form-checkout">
+                        <h2>Delivery details</h2>
+                        <input type="hidden" name="product_id" value="<%= productfeature.product_id %>" />
+                        <label for="customer-fname">First Name:</label>
+                        <input type="text" name="customer_first_name" id="customer-fname" placeholder="Jane"/>
+                        <label for="customer-lname">Last Name:</label>
+                        <input type="text" name="customer_last_name" id="customer-lname" placeholder="Doe" />
+                        <label for="customer-email">Email:</label>
+                        <input type="email" name="customer_email" id="customer-email" placeholder="email@address.com" />
+                        <label for="customer-phone">Phone:</label>
+                        <input type="tel" name="customer_phone" id="customer-phone" placeholder="0400000000" />
+                        <label for="customer-address">Address:</label>
+                        <textarea name="customer_address" id="customer-address" rows="3" placeholder="123 address Street"></textarea>
+                        <label for="address-suburb">Suburb:</label>
+                        <input type="text" name="address_suburb" id="address-suburb" placeholder="Australian Suburb"/>
+                        <label for="address-state">State:</label>
+                        <input type="text" name="address_state" id="address-state" placeholder="QLD" />
+                        <label for="address-postcode">Postcode:</label>
+                        <input type="text" name="address_postcode" id="address-postcode" placeholder="4000"/>
+                        <table>
+                            <tr>
+                                <td><a href="/" class="back-button">Back</a></td>
+                                <td><input type="submit" value="Submit" class="submit-checkout" /></td>
+                            </tr>
+                        </table>
+                        
+                        
+                    </form>
+                </section>
+            </section>
+        </article>
+        <%- include("partials/footer.ejs") %>
+    </main>
+</body>
+
+</html>

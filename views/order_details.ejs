@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Hour - Order details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <section class="logo"><a href="/product_item"><img src="images/logo.png" alt="logo image"></a></section>
+        </header>
+        <article>
+            <h1>Order Details</h1>
+            <section class="order-section">
+                <section class="product-section">
+                    <h2>Thank you for shopping with us!</h2>
+                    <figure>
+                        <img src="images/mobilephone.jpg" alt="Mobile Phone image" />
+                        <h2>
+                            <%= orderProduct.product_name %>
+                        </h2>
+                        <figcaption>$<%= orderProduct.product_price %>
+                        </figcaption>
+                    </figure>
+                </section>
+                <section class="order-details">
+                    <label for="order-id">Order Number: </label>
+                    <span id="id">
+                        <%= orderProduct.order_id %>
+                    </span>
+                    <label for="order-date">Order Date:</label>
+                    <span id="order-date">
+                        <%= orderProduct.order_datetime.toLocaleString()%>
+                    </span>
+                    <label for="name">Order Name:</label>
+                    <span id="name">
+                        <%= orderProduct.customer_first_name %>
+                    </span>
+                    <label for="status">Order Status:</label>
+                    <span id="status">
+                        <%= orderProduct.order_status %>
+                    </span>
+                    <a href="/" class="back-button">Back</a>
+                    <a href="order_details?id=<%= orderProduct.order_id %>" class="refresh-button"> Refresh</a>
+                </section>
+        </article>
+        <%- include("partials/footer.ejs") %>
+    </main>
+</body>
+
+</html>

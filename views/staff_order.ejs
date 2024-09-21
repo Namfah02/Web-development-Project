@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Hour - Staff Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header class="staff-header">
+            <section class="logo"><a href="/staff_changelog"><img src="images/logo.png" alt=" logo image"></a></section>
+            <section class="logout"><a href="/staff_logout" class="staff-logout">Logout</a></section>
+        </header>
+        <%- include("partials/staff_nav.ejs", { accessRole }) %>
+        <h1>Orders</h1>
+        <nav class="order-nav">
+            <a href="/staff_order?status=pending">Pending</a>
+            <a href="/staff_order?status=packing">Packing</a>
+            <a href="/staff_order?status=shipped">Shipped</a>
+            <a href="/staff_order?status=cancelled">Cancelled</a>
+        </nav>
+        <article class="order-table">
+            <section class="staff-order">
+                <table>
+                    <tr>
+                        <th>Order number</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Order date</th>
+                        <th>Status</th>
+                    </tr>
+                    <% for (let orderProduct of ordersProducts) { %>
+                        <tr>
+                            <td>
+                                <%= orderProduct.order_id %>
+                            </td>
+                            <td>
+                                <%= orderProduct.customer_first_name %>
+                                <%= orderProduct.customer_last_name %>
+                            </td>
+                            <td>
+                                <%= orderProduct.product_name %>
+                            </td>
+                            <td>
+                                <%= orderProduct.order_datetime.toLocaleString() %>
+                            </td>
+                            <td>
+                                <form action="/staff_order" method="post" class="order-update-form">
+                                    <input type="hidden" name="order_id" value="<%= orderProduct.order_id %>" />
+                                    <select name="status">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="packing">Packing</option>
+                                        <option value="shipped">Shipped</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                    <input type="submit" value="Update" class="update-button" />
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                </table>
+            </section>
+        </article>
+        <%- include("partials/footer.ejs") %>
+    </main>
+</body>
+
+</html>
